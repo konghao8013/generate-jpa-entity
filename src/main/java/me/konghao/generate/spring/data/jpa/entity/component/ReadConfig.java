@@ -1,4 +1,4 @@
-package me.konghao.generate.spring.data.jpa.entity;
+package me.konghao.generate.spring.data.jpa.entity.component;
 
 
 import java.io.BufferedReader;

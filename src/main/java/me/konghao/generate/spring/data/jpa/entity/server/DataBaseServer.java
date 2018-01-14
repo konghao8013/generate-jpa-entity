@@ -9,8 +9,7 @@ import java.util.List;
 
 import com.mysql.cj.jdbc.PreparedStatement;
 
-import me.konghao.generate.spring.data.jpa.entity.IResultSetOpen;
-import me.konghao.generate.spring.data.jpa.entity.ReadConfig;
+import me.konghao.generate.spring.data.jpa.entity.component.ReadConfig;
 import me.konghao.generate.spring.data.jpa.entity.component.TypeHelper;
 import me.konghao.generate.spring.data.jpa.entity.dbentity.Config;
 import me.konghao.generate.spring.data.jpa.entity.dbentity.DBColumn;

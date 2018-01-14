@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import junit.framework.Assert;
+import me.konghao.generate.spring.data.jpa.entity.component.ReadConfig;
 import me.konghao.generate.spring.data.jpa.entity.dbentity.Config;
 import me.konghao.generate.spring.data.jpa.entity.dbentity.DBTable;
 

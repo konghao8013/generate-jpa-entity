@@ -1,4 +1,4 @@
-package me.konghao.generate.spring.data.jpa.entity;
+package me.konghao.generate.spring.data.jpa.entity.server;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -27,7 +27,6 @@ import me.konghao.generate.spring.data.jpa.entity.component.TypeHelper;
 import me.konghao.generate.spring.data.jpa.entity.dbentity.Config;
 import me.konghao.generate.spring.data.jpa.entity.dbentity.DBColumn;
 import me.konghao.generate.spring.data.jpa.entity.dbentity.DBTable;
-import me.konghao.generate.spring.data.jpa.entity.server.DataBaseServer;
 
 public class GenerateCode {
 

@@ -1,4 +1,4 @@
-package me.konghao.generate.spring.data.jpa.entity;
+package me.konghao.generate.spring.data.jpa.entity.server;
 
 import java.sql.ResultSet;
 
