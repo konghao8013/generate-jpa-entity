@@ -30,15 +30,13 @@ import me.konghao.generate.spring.data.jpa.entity.dbentity.DBTable;
 
 public class GenerateCode {
 
-
 	public GenerateCode() {
-		
-		
+
 	}
 
 	public void buildCode() {
 		// TODO 自动生成的方法存根
-		DataBaseServer db=new DataBaseServer();
+		DataBaseServer db = new DataBaseServer();
 		List<DBTable> tabs = db.initTabData();
 		for (int i = 0; i < tabs.size(); i++) {
 			DBTable tab = tabs.get(i);
@@ -58,7 +56,11 @@ public class GenerateCode {
 		sb.append("@Entity\r\n");
 		sb.append("@Table(name = \"" + tab.getName() + "\") \r\n");
 		sb.append("public class " + UpFirstStr(tab.getNameIgnorePrefix()) + " implements Serializable {\r\n");
-		sb.append("private static final long serialVersionUID = 2300044412175011558L;\r\n");
+		/*
+		 * sb.
+		 * append("private static final long serialVersionUID = 2300044412175011558L;\r\n"
+		 * );
+		 */
 		StringBuilder sbToString = new StringBuilder();
 		sbToString.append("@Override\r\n");
 		sbToString.append("public String toString() {\r\n");
@@ -77,8 +79,8 @@ public class GenerateCode {
 			String methodName = UpFirstStr(col.getColName());
 			sb.append(" public " + col.getColType() + " get" + methodName + "() { return " + col.getColName()
 					+ "; }\r\n");
-			sb.append(" public void set" + methodName + "(String " + col.getColName() + ") { this." + col.getColName()
-					+ " = " + col.getColName() + "; }\r\n");
+			sb.append(" public void set" + methodName + "(" + col.getColType() + " " + col.getColName() + ") { this."
+					+ col.getColName() + " = " + col.getColName() + "; }\r\n");
 
 			sbToString.append(
 					"+\"" + (i > 0 ? "," : "") + "'" + col.getColName() + "'='\"+" + col.getColName() + "+\"'\"");
@@ -88,11 +90,8 @@ public class GenerateCode {
 		sbToString.append("}\r\n");
 		sb.append(sbToString.toString());
 		sb.append("}\r\n");
-		FileHelper f=new FileHelper();
+		FileHelper f = new FileHelper();
 		f.textToFile(UpFirstStr(tab.getNameIgnorePrefix()) + ".java", sb.toString());
 	}
-
-
-	
 
 }

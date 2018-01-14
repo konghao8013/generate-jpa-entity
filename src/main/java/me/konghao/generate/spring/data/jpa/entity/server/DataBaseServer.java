@@ -51,7 +51,7 @@ public class DataBaseServer {
 						column.setColType(t.getJavaType(rst.getString(2)));
 						column.setDesc(rst.getString(3));
 						column.setIdentity(rst.getBoolean(4));
-						column.setIdentity(rst.getBoolean(5));
+						column.setPK(rst.getBoolean(5));
 						columns.add(column);
 					}
 				} catch (SQLException e) {

@@ -4,7 +4,11 @@ public class TypeHelper {
 	public String getJavaType(String type) {
 		type = type.toUpperCase();
 		String result = null;
+		
 		switch (type) {
+		case "INT(11)":
+			result = "Integer";
+			break;
 		case "VARCHAR":
 			result = "String";
 			break;
