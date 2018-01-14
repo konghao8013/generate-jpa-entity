@@ -62,32 +62,39 @@ public class GenerateCode {
 		 * );
 		 */
 		StringBuilder sbToString = new StringBuilder();
+		StringBuilder propertyStr = new StringBuilder();
+		StringBuilder methodStr = new StringBuilder();
 		sbToString.append("@Override\r\n");
 		sbToString.append("public String toString() {\r\n");
 		sbToString.append("return \"" + UpFirstStr(tab.getNameIgnorePrefix()) + "{\"");
 		for (int i = 0; i < tab.getColumns().size(); i++) {
 			DBColumn col = tab.getColumns().get(i);
 			if (col.isPK()) {
-				sb.append("@Id\r\n");
+				propertyStr.append("@Id\r\n");
 
 			}
 			if (col.isIdentity()) {
-				sb.append("@GeneratedValue(strategy = GenerationType.IDENTITY)\r\n");
+				propertyStr.append("@GeneratedValue(strategy = GenerationType.IDENTITY)\r\n");
 			}
-			sb.append("@Column(name = \"" + col.getColName() + "\", nullable = false) \r\n");
-			sb.append("private " + col.getColType() + " " + col.getColName() + ";\r\n");
+			propertyStr.append("@Column(name = \"" + col.getColName() + "\", nullable = false) \r\n");
+			propertyStr.append("private " + col.getColType() + " " + col.getColName() + ";\r\n");
 			String methodName = UpFirstStr(col.getColName());
-			sb.append(" public " + col.getColType() + " get" + methodName + "() { return " + col.getColName()
+			methodStr.append(" public " + col.getColType() + " get" + methodName + "() { return " + col.getColName()
 					+ "; }\r\n");
-			sb.append(" public void set" + methodName + "(" + col.getColType() + " " + col.getColName() + ") { this."
-					+ col.getColName() + " = " + col.getColName() + "; }\r\n");
+			methodStr.append(" public void set" + methodName + "(" + col.getColType() + " " + col.getColName()
+					+ ") { this." + col.getColName() + " = " + col.getColName() + "; }\r\n");
 
 			sbToString.append(
 					"+\"" + (i > 0 ? "," : "") + "'" + col.getColName() + "'='\"+" + col.getColName() + "+\"'\"");
 
 		}
+
 		sbToString.append("+'}';");
 		sbToString.append("}\r\n");
+
+		sb.append(propertyStr.toString());
+		sb.append(methodStr.toString());
+
 		sb.append(sbToString.toString());
 		sb.append("}\r\n");
 		FileHelper f = new FileHelper();
