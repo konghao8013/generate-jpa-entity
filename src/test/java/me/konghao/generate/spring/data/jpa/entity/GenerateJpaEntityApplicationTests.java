@@ -35,12 +35,4 @@ public class GenerateJpaEntityApplicationTests {
 		System.out.println(read.readConfigCurrent());
 	}
 
-
-	@Test
-	public void TestGetTables() {
-		 GenerateCode generate=new GenerateCode();
-		List<DBTable> list = generate.getTables();
-		System.out.println("==============generate.getTables()===============");
-		System.out.println(list.get(0).getName());
-	}
 }
