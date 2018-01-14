@@ -1,0 +1,1 @@
+java -jar  generate-jpa-entity-0.0.1-SNAPSHOT.jar
