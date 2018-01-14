@@ -69,20 +69,7 @@ public class GenerateCode {
 		sbToString.append("return \"" + UpFirstStr(tab.getNameIgnorePrefix()) + "{\"");
 		for (int i = 0; i < tab.getColumns().size(); i++) {
 			DBColumn col = tab.getColumns().get(i);
-			if (col.isPK()) {
-				propertyStr.append("@Id\r\n");
-
-			}
-			if (col.isIdentity()) {
-				propertyStr.append("@GeneratedValue(strategy = GenerationType.IDENTITY)\r\n");
-			}
-			propertyStr.append("@Column(name = \"" + col.getColName() + "\", nullable = false) \r\n");
-			propertyStr.append("private " + col.getColType() + " " + col.getColName() + ";\r\n");
-			String methodName = UpFirstStr(col.getColName());
-			methodStr.append(" public " + col.getColType() + " get" + methodName + "() { return " + col.getColName()
-					+ "; }\r\n");
-			methodStr.append(" public void set" + methodName + "(" + col.getColType() + " " + col.getColName()
-					+ ") { this." + col.getColName() + " = " + col.getColName() + "; }\r\n");
+			buildCodeByTab_column(col, propertyStr, methodStr);
 
 			sbToString.append(
 					"+\"" + (i > 0 ? "," : "") + "'" + col.getColName() + "'='\"+" + col.getColName() + "+\"'\"");
@@ -99,6 +86,41 @@ public class GenerateCode {
 		sb.append("}\r\n");
 		FileHelper f = new FileHelper();
 		f.textToFile(UpFirstStr(tab.getNameIgnorePrefix()) + ".java", sb.toString());
+	}
+
+	private void buildCodeByTab_column(DBColumn column, StringBuilder propertyCode, StringBuilder methodCode) {
+		buildCodeByTab_column_property(column, propertyCode);
+
+		buildCodeByTab_column_method(column, methodCode);
+	}
+
+	private void buildCodeByTab_column_method(DBColumn column, StringBuilder methodCode) {
+		String methodName = UpFirstStr(column.getColName());
+
+		methodCode.append("/**\r\n");
+		methodCode.append(" * 获取 " + column.getDesc() + "\r\n");
+		methodCode.append(" **/\r\n");
+
+		methodCode.append(" public " + column.getColType() + " get" + methodName + "() { return " + column.getColName()
+				+ "; }\r\n");
+		
+		methodCode.append("/**\r\n");
+		methodCode.append(" * 设置 " + column.getDesc() + "\r\n");
+		methodCode.append(" **/\r\n");
+		methodCode.append(" public void set" + methodName + "(" + column.getColType() + " " + column.getColName()
+				+ ") { this." + column.getColName() + " = " + column.getColName() + "; }\r\n");
+	}
+
+	private void buildCodeByTab_column_property(DBColumn column, StringBuilder propertyCode) {
+		if (column.isPK()) {
+			propertyCode.append("@Id\r\n");
+
+		}
+		if (column.isIdentity()) {
+			propertyCode.append("@GeneratedValue(strategy = GenerationType.IDENTITY)\r\n");
+		}
+		propertyCode.append("@Column(name = \"" + column.getColName() + "\", nullable = false) \r\n");
+		propertyCode.append("private " + column.getColType() + " " + column.getColName() + ";\r\n");
 	}
 
 }

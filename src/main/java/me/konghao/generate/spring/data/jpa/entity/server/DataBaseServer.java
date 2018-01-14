@@ -37,7 +37,8 @@ public class DataBaseServer {
 
 	private List<DBColumn> getColumns(String tabName) {
 		String sql = "select column_Name,column_Type,COLUMN_COMMENT,(case when EXTRA='auto_increment' then 1 else 0 end) identity,(case when COLUMN_KEY='PRI' then 1 else 0 end) as IsPK from information_schema.columns where	 table_schema='"
-				+ config.getDatabase() + "' and table_name='" + tabName + "' order by   COLUMN_KEY='PRI' desc,EXTRA='auto_increment'  desc";
+				+ config.getDatabase() + "' and table_name='" + tabName
+				+ "' order by   COLUMN_KEY='PRI' desc,EXTRA='auto_increment'  desc";
 		List<DBColumn> columns = new ArrayList<DBColumn>();
 		TypeHelper t = new TypeHelper();
 		OpenDB(sql, new IResultSetOpen() {
