@@ -91,7 +91,7 @@ public class DataBaseServer {
 		Config config = this.read.Read();
 		Connection connection = null;
 		try {
-			String url = config.getUrl() + "/mysql?autoReconnect=true&useSSL=false";
+			String url = config.getUrl() + "/mysql?autoReconnect=true&useSSL=false&serverTimezone=UTC ";
 			connection = DriverManager.getConnection(url, config.getName(), config.getPwd());
 		} catch (SQLException e) {
 			// TODO 自动生成的 catch 块
